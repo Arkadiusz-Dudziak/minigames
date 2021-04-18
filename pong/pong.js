@@ -5,8 +5,9 @@ const playVersusComputer = false;
 var pauseButton = document.getElementById("pauseButton");
 var isPaused = true;
 var goalsNeededToWin = 5;
+var player1InitState, player2InitState, ballInitState;
 // create the player1 padle
-const player1 = {
+var player1 = {
     x: 50,
     y: cvs.height/2 - 100/2,
     width: 10,
@@ -16,7 +17,7 @@ const player1 = {
 }
 
 // create the player2 padle
-const player2 = {
+var player2 = {
     x: cvs.width - 60,
     y: cvs.height/2 - 100/2,
     width: 10,
@@ -26,7 +27,7 @@ const player2 = {
 }
 
 //create the ball
-const ball = {
+var ball = {
     x: cvs.width/2,
     y: cvs.height/2,
     radius: 10,
@@ -269,11 +270,21 @@ function pause(){
         pauseButton.style="background-image: url(pause.svg);"
 }
 
-function reset(){
+function resetGame(){
     console.log('reset');
+    player1 = jQuery.extend(true, {}, player1InitState);
+    player2 = jQuery.extend(true, {}, player2InitState);
+    ball = jQuery.extend(true, {}, ballInitState);
+    isPaused = true;
+}
+
+function copyInitGameState(){
+    player1InitState = jQuery.extend(true, {}, player1);
+    player2InitState = jQuery.extend(true, {}, player2);
+    ballInitState = jQuery.extend(true, {}, ball);
 }
 // number of frames per second
 let framePerSecond = 60;
-
+copyInitGameState();
 //call the game function 60 times every 1 Sec
 let loop = setInterval(game,1000/framePerSecond);

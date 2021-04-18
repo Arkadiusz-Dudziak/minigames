@@ -1,0 +1,36 @@
+body{
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+footer {
+    text-align: center;
+    padding: 5px;
+    position: fixed;
+    bottom: 0;
+    background-color: black;
+    color: white;
+    width: 100%;
+}
+
+button {
+    background-image: url(play-button.svg);
+    background-color: transparent;
+    background-size: 100% 100%;
+    margin-top:20px;
+    border: 0;
+    padding: 35px 35px;
+    color: white;
+    outline: none;
+    font-size-adjust: 18px;
+}
+#resetButton{
+    background-image: url(refreshing.svg);
+}
+
+button:hover{
+    cursor: pointer;
+}

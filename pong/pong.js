@@ -85,7 +85,8 @@ const controller = {
     w: false,
     s: false, 
     up: false,
-    down: false
+    down: false,
+    space: false
 }
 
 
@@ -106,10 +107,11 @@ function paddleControllerDown(e) {
     }
     if(' ' === key)
     {
-        console.log('pause');
+        controller.space = true;
         pause();
     }
-        
+    if('r' === key)
+        resetGame();    
 }
 
 function paddleControllerUp(e) {
@@ -127,7 +129,10 @@ function paddleControllerUp(e) {
     if ('ArrowDown' === key) {
         controller.down = false;
     }
-
+    if(' ' === key)
+    {
+        controller.space = false;
+    }
 }
 
 function movePadles(){
@@ -246,11 +251,11 @@ function update(){
     if(ball.x - ball.radius < 0){
         //the player2 win
         player2.score++;
-        resetBall();
+        resetPositions();
     }else if(ball.x + ball.radius > cvs.width){
         //the player1 win
         player1.score++;
-        resetBall();
+        resetPositions();
     }
 
 }
@@ -263,15 +268,26 @@ function game(){
 }
 
 function pause(){
-    isPaused = !isPaused;
+    if(controller.space == true)
+        isPaused = !isPaused;
+    if(pauseButton.getAttribute("onclick"))
+        isPaused = !isPaused;
     if(isPaused)
         pauseButton.style="background-image: url(play-button.svg);"
     else
         pauseButton.style="background-image: url(pause.svg);"
 }
 
+function resetPositions(){
+    player1.x = 50;
+    player1.y = cvs.height/2 - 100/2;
+    player2.x = cvs.width - 60;
+    player2.y = cvs.height/2 - 100/2;
+    resetBall();
+    isPaused = true;
+}
+
 function resetGame(){
-    console.log('reset');
     player1 = jQuery.extend(true, {}, player1InitState);
     player2 = jQuery.extend(true, {}, player2InitState);
     ball = jQuery.extend(true, {}, ballInitState);

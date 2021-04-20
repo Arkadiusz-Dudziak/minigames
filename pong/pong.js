@@ -13,7 +13,8 @@ var player1 = {
     width: 10,
     height: 100,
     color: "WHITE",
-    score: 0
+    score: 0,
+    name: "player1"
 }
 
 // create the player2 padle
@@ -23,7 +24,8 @@ var player2 = {
     width: 10,
     height: 100,
     color: "WHITE",
-    score: 0
+    score: 0,
+    name: "player2"
 }
 
 //create the ball
@@ -80,6 +82,8 @@ function drawText(text,x,y,color){
 
 document.addEventListener('keydown', paddleControllerDown);
 document.addEventListener('keyup', paddleControllerUp);
+document.addEventListener('keydown', buttonCotrollerDown);
+document.addEventListener('keyup', buttonCotrollerUp);
 
 const controller = {
     w: false,
@@ -105,13 +109,28 @@ function paddleControllerDown(e) {
     if ('ArrowDown' === key) {
         controller.down = true;
     }
+        
+}
+
+function buttonCotrollerDown(e){
+    let key = e.key || String.fromCharCode(e.keyCode);
     if(' ' === key)
     {
         controller.space = true;
         pause();
     }
     if('r' === key)
-        resetGame();    
+        resetGame();
+}
+function buttonCotrollerUp(e){
+    let key = e.key || String.fromCharCode(e.keyCode);
+    if(' ' === key)
+    {
+        controller.space = false;
+        pause();
+    }
+    if('r' === key)
+        resetGame();
 }
 
 function paddleControllerUp(e) {
@@ -250,12 +269,22 @@ function update(){
     //update the score
     if(ball.x - ball.radius < 0){
         //the player2 win
-        player2.score++;
         resetPositions();
+        player2.score++;
     }else if(ball.x + ball.radius > cvs.width){
         //the player1 win
-        player1.score++;
         resetPositions();
+        player1.score++;
+    }
+    if(player1.score >= goalsNeededToWin)
+    {
+        alert("Wygrywa gracz: " + player1.name);
+        resetGame();
+    }
+    if(player2.score >= goalsNeededToWin)
+    {
+        alert("Wygrywa gracz: " + player2.name);
+        resetGame();
     }
 
 }

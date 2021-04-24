@@ -46,29 +46,50 @@ function createPiece(type) {
 
 
 
-function updateScore() {
-    document.getElementById("score").innerText = tetris.player.score;
-}
 
 
-const canvas = document.getElementById('tetris');
-const tetris = new Tetris(canvas);
+const tetri = [];
 
-document.addEventListener('keydown', e => {
-    const player = tetris.player;
-    let key = e.key || String.fromCharCode(e.keyCode);
-    if ('ArrowRight' === key) {
-        player.move(1);
-    } else if('ArrowLeft' === key) {
-        player.move(-1);
-    } else if('ArrowDown' === key) {
-        player.drop();
-    } else if('q' === key) {
-        player.rotate(1);
-    } else if('e' === key) {
-        player.rotate(-1);
-    }
-    
+const playerElements = document.querySelectorAll('.player');
+[...playerElements].forEach(element => {
+    const tetris = new Tetris(element);
+    tetri.push(tetris);
 })
 
-updateScore();
+
+const keyListener = (e) => {
+        [
+            ['ArrowRight', 'ArrowLeft', ',', '.', 'ArrowDown'],
+            ['d', 'a', 'q', 'e', 's']
+        ].forEach((key, index) => {
+            const player = tetri[index].player;
+            let keypressed = e.key || String.fromCharCode(e.keyCode);
+            if(e.type === 'keydown'){
+                if (key[0] === keypressed) {
+                    player.move(1);
+                } else if(key[1] === keypressed) {
+                    player.move(-1);
+                } else if(key[2] === keypressed) {
+                    player.rotate(1);
+                } else if(key[3] === keypressed) {
+                    player.rotate(-1);
+                }
+            }
+             if(key[4] === keypressed) {
+                if(e.type === 'keydown') {
+                    if(player.dropInterval !== player.DROP_FAST)
+                    {
+                        player.drop();
+                        player.dropInterval = player.DROP_FAST;
+                    }
+                } else {
+                    player.dropInterval = player.DROP_SLOW;
+                }
+                
+            }
+        });
+}
+
+document.addEventListener('keydown', keyListener);
+document.addEventListener('keyup', keyListener);
+

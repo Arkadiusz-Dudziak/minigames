@@ -59,8 +59,8 @@ const playerElements = document.querySelectorAll('.player');
 
 const keyListener = (e) => {
         [
-            ['ArrowRight', 'ArrowLeft', ',', '.', 'ArrowDown'],
-            ['d', 'a', 'q', 'e', 's']
+            ['d', 'a', 'q', 'e', 's'],
+            ['ArrowRight', 'ArrowLeft', ',', '.', 'ArrowDown']
         ].forEach((key, index) => {
             const player = tetri[index].player;
             let keypressed = e.key || String.fromCharCode(e.keyCode);

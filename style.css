@@ -1,0 +1,62 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(255,0,0,1) 29%, rgba(0,212,255,1) 100%);
+    color: white;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+body {
+    font-family: 'Zen Dots', cursive;
+    background-color: #2973d3;
+}
+
+h1 {
+    text-align: center;
+}
+
+.games {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: 20px;
+    gap: 20px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.game_card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: white;
+}
+
+.game_card:hover {
+    cursor: pointer;
+}
+
+.game_description {
+    text-align: center;
+    padding: 10px 20px;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+footer {
+    text-align: center;
+    padding: 5px;
+    position: fixed;
+    bottom: 0;
+    background-color: black;
+    color: white;
+    width: 100%;
+    font-size: small;
+}

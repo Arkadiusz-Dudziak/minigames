@@ -75,11 +75,14 @@ class Player {
     drop() {
         this.pos.y++;
         if(this.arena.collide(this)) {
-            debugger;
             this.pos.y--;
             this.arena.merge(this);
             this.reset();
             this.score += this.arena.sweep();
+            if(this.score >= bestScore) {
+                bestScore = this.score;
+                updateBestScore();
+            }
             this.tetris.updateScore(this.score);
         }
         this.dropCounter = 0;

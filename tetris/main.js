@@ -46,6 +46,25 @@ function createPiece(type) {
 
 const tetri = [];
 
+var bestScore = 0;
+const bestScoreElement = document.getElementById('bestPoints');
+const bestPlayerElement = document.getElementById('winningPlayer');
+const gameStatusElement = document.getElementById('gameStatus');
+
+function updateBestScore() {
+    bestScoreElement.innerText = bestScore;
+    const player1 = tetri[0].player;
+    const player2 = tetri[1].player;
+    gameStatusElement.innerText = "WINNING"
+    if(player1.score > player2.score) {
+        bestPlayerElement.innerText = "Player1";
+    } else if (player1.score < player2.score) {
+        bestPlayerElement.innerText = "Player2";
+    } else {
+        gameStatusElement.innerText = "DRAW";
+    }
+}
+
 const playerElements = document.querySelectorAll('.player');
 [...playerElements].forEach(element => {
     const tetris = new Tetris(element);

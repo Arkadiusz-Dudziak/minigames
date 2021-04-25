@@ -47,6 +47,7 @@ function createPiece(type) {
 const tetri = [];
 
 var bestScore = 0;
+const winPointsCondition = 500;
 const bestScoreElement = document.getElementById('bestPoints');
 const bestPlayerElement = document.getElementById('winningPlayer');
 const gameStatusElement = document.getElementById('gameStatus');
@@ -58,10 +59,22 @@ function updateBestScore() {
     gameStatusElement.innerText = "WINNING"
     if(player1.score > player2.score) {
         bestPlayerElement.innerText = "Player1";
+        tetri[0].canvas.style.borderColor = "#ffff00";
     } else if (player1.score < player2.score) {
         bestPlayerElement.innerText = "Player2";
+        tetri[1].canvas.style.borderColor = "#ffff00";
     } else {
+        tetri[0].canvas.style.borderColor = "#ffff00";
+        tetri[0].canvas.style.borderColor = "#ffff00";
         gameStatusElement.innerText = "DRAW";
+    }
+    checkIfWinCondition();
+}
+
+function checkIfWinCondition() {
+    if(bestScore > winPointsCondition) {
+        alert(bestPlayerElement.innerText + " WINS");
+        window.location.reload();
     }
 }
 

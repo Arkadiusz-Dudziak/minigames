@@ -5,6 +5,12 @@ body {
     font-size: 2em;
     text-align: center;
     display: flex;
+    
+    flex-direction: column;
+}
+
+.container {
+    display: flex;
 }
 
 .player {
@@ -14,4 +20,16 @@ body {
 canvas {
     border: solid .2em #fff;
     height: 90vh;
+}
+
+
+footer {
+    text-align: center;
+    padding: 5px;
+    position: fixed;
+    bottom: 0;
+    background-color: black;
+    color: white;
+    width: 100%;
+    font-size: small;
 }

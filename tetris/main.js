@@ -44,10 +44,6 @@ function createPiece(type) {
     }
 }
 
-
-
-
-
 const tetri = [];
 
 const playerElements = document.querySelectorAll('.player');

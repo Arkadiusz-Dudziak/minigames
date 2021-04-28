@@ -6,7 +6,7 @@ const box = 32;
 
 // load images
 const groundImg = new Image();
-groundImg.src = "images/ground2.jpg";
+groundImg.src = "images/ground.jpg";
 
 const foodImg = new Image();
 foodImg.src = "images/food.png";
@@ -98,8 +98,8 @@ function draw() {
     }
 
     // game over
-    if(snakeX < box || snakeX > 17 * box || snakeY < 3*box 
-        || snakeY > 17*box || collision(newHead, snake)) {
+    if(snakeX < box || snakeX > 36 * box || snakeY < 3*box 
+        || snakeY > 24*box || collision(newHead, snake)) {
         clearInterval(game);
     }
     

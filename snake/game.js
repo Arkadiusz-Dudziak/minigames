@@ -19,60 +19,69 @@ function collision(head, array) {
 }
 
 var s1 = new Snake(9, 10);
+var s2 = new Snake(15,15);
+
+var snakes = [];
+snakes[0] = s1;
+snakes[1] = s2;
 
 
 // draw everything to canvas
 function draw() {
     ctx.drawImage(groundImg, 0, 0);
 
-    for(let i=0; i<s1.snake.length; i++) {
-        ctx.fillStyle = ( i==0 )? "green" : "white";
-        ctx.fillRect(s1.snake[i].x, s1.snake[i].y, box, box);
-
-        ctx.strokeStyle = "red";
-        ctx.strokeRect(s1.snake[i].x, s1.snake[i].y, box, box);
-    }
-
-    ctx.drawImage(foodImg, food.x, food.y);
-
-    // old head position
-    let snakeX = s1.snake[0].x;
-    let snakeY = s1.snake[0].y;
-
+    snakes.forEach(e => {
+        for(let i=0; i<e.snake.length; i++) {
+            ctx.fillStyle = ( i==0 )? "green" : "white";
+            ctx.fillRect(e.snake[i].x, e.snake[i].y, box, box);
     
+            ctx.strokeStyle = "red";
+            ctx.strokeRect(e.snake[i].x, e.snake[i].y, box, box);
+        }
 
-    // which direction
-    if( d == "LEFT") snakeX -= box;
-    if( d == "UP") snakeY -= box;
-    if( d == "RIGHT") snakeX += box;
-    if( d == "DOWN") snakeY += box;
+        ctx.drawImage(foodImg, food.x, food.y);
 
-    // if snake eats the food 
-    if(snakeX == food.x && snakeY == food.y) {
-        s1.score++;
-        food = new Food();
-    } else {
-        // remove the tail 
-        s1.snake.pop();
-    }
+        // old head position
+        let snakeX = e.snake[0].x;
+        let snakeY = e.snake[0].y;
 
-    // add new Head
-    let newHead = {
-        x : snakeX, 
-        y : snakeY
-    }
+        // which direction
+        if( d == "LEFT") snakeX -= box;
+        if( d == "UP") snakeY -= box;
+        if( d == "RIGHT") snakeX += box;
+        if( d == "DOWN") snakeY += box;
 
-    // game over
-    if(snakeX < box || snakeX > 36 * box || snakeY < 3*box 
-        || snakeY > 22*box || collision(newHead, s1.snake)) {
-        clearInterval(game);
-    }
-    
-    s1.snake.unshift(newHead);
+        // if snake eats the food 
+        if(snakeX == food.x && snakeY == food.y) {
+            e.score++;
+            food = new Food();
+        } else {
+            // remove the tail 
+            e.snake.pop();
+        }
 
-    ctx.fillStyle = "white";
-    ctx.font = "45px Changa one";
-    ctx.fillText(s1.score, 2*box, 1.6*box);
+        // add new Head
+        let newHead = {
+            x : snakeX, 
+            y : snakeY
+        }
+
+        // game over
+        if(snakeX < box || snakeX > 36 * box || snakeY < 3*box 
+            || snakeY > 22*box || collision(newHead, snake)) {
+            clearInterval(game);
+        }
+
+        e.snake.unshift(newHead);
+
+        ctx.fillStyle = "white";
+        ctx.font = "45px Changa one";
+        ctx.fillText(e.score, 2*box, 1.6*box);
+
+    });
+    // ctx.fillStyle = "white";
+    // ctx.font = "45px Changa one";
+    // ctx.fillText(e.score, 2*box, 1.6*box);
 }
 
 // call draw function every 100ms

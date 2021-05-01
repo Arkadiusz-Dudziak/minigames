@@ -49,11 +49,8 @@ function draw() {
 
     // if snake eats the food 
     if(snakeX == food.x && snakeY == food.y) {
-        score++;
-        food = {
-            x : Math.floor(Math.random()*34+1) * box,
-            y : Math.floor(Math.random()*20+3) * box
-        }
+        s1.score++;
+        food = new Food();
     } else {
         // remove the tail 
         s1.snake.pop();
@@ -75,7 +72,7 @@ function draw() {
 
     ctx.fillStyle = "white";
     ctx.font = "45px Changa one";
-    ctx.fillText(score, 2*box, 1.6*box);
+    ctx.fillText(s1.score, 2*box, 1.6*box);
 }
 
 // call draw function every 100ms

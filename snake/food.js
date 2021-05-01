@@ -3,8 +3,11 @@ const box = 32;
 const foodImg = new Image();
 foodImg.src = "images/food.png";
 
-// create the food
-let food = {
-    x : Math.floor(Math.random()*17+1) * box,
-    y : Math.floor(Math.random()*15+3) * box
+class Food {
+    constructor() {
+        this.x = Math.floor(Math.random()*34+1) * box;
+        this.y = Math.floor(Math.random()*20+3) * box;
+    }
 }
+
+let food = new Food();

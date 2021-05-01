@@ -5,17 +5,9 @@ class Snake {
             x: x*box, 
             y: y*box
         };
+        this.score = 0;
     }
 }
-// create the snake 
-let snake = [];
-snake[0] = {
-    x: 9 * box,
-    y: 10 * box
-}
-
-// score variable
-let score = 0;
 
 // control the snake 
 document.addEventListener("keydown", direction);

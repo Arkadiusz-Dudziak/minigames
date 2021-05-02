@@ -32,8 +32,8 @@ function snakes_collision(head, array) {
     }
 }
 
-var s1 = new Snake(15, 10);
-var s2 = new Snake(15,12);
+var s1 = new Snake(10, 12);
+var s2 = new Snake(25,12);
 
 var snakes = [];
 snakes[0] = s1;
@@ -47,7 +47,7 @@ function draw() {
     snakes.forEach((e, i) => {
         for(let j=0; j<e.snake.length; j++) {
             if( i == 0)
-                ctx.fillStyle = ( j==0 )? "green" : "#b8ffba";
+                ctx.fillStyle = ( j==0 )? "orange" : "#ffd370";
             if( i == 1)
                 ctx.fillStyle = ( j==0 )? "blue" : "#4287f5";
             ctx.fillRect(e.snake[j].x, e.snake[j].y, box, box);
@@ -100,13 +100,13 @@ function draw() {
 
         e.snake.unshift(newHead);
 
-        ctx.fillStyle = "white";
+        ctx.fillStyle = (i==0)? "orange" : "blue";
         ctx.font = "45px Changa one";
 
-        ctx.fillText(e.score, (i+1)*2*box, 1.6*box);
+        ctx.fillText(e.score, i*2.5*box+2.5*box, 1.6*box);
 
     });
 }
 
-// call draw function every 200ms
-let game = setInterval(draw, 200);
+// call draw function every 225ms
+let game = setInterval(draw, 225);

@@ -11,3 +11,4 @@ class Food {
 }
 
 let food = new Food();
+let food2 = new Food();

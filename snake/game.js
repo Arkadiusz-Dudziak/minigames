@@ -30,35 +30,46 @@ snakes[1] = s2;
 function draw() {
     ctx.drawImage(groundImg, 0, 0);
 
-    snakes.forEach(e => {
-        for(let i=0; i<e.snake.length; i++) {
-            ctx.fillStyle = ( i==0 )? "green" : "white";
-            ctx.fillRect(e.snake[i].x, e.snake[i].y, box, box);
+    snakes.forEach((e, i) => {
+        for(let j=0; j<e.snake.length; j++) {
+            if( i == 0)
+                ctx.fillStyle = ( j==0 )? "green" : "#b8ffba";
+            if( i == 1)
+                ctx.fillStyle = ( j==0 )? "blue" : "#4287f5";
+            ctx.fillRect(e.snake[j].x, e.snake[j].y, box, box);
     
             ctx.strokeStyle = "red";
-            ctx.strokeRect(e.snake[i].x, e.snake[i].y, box, box);
+            ctx.strokeRect(e.snake[j].x, e.snake[j].y, box, box);
         }
 
         ctx.drawImage(foodImg, food.x, food.y);
+        ctx.drawImage(foodImg, food2.x, food2.y);
 
         // old head position
         let snakeX = e.snake[0].x;
         let snakeY = e.snake[0].y;
 
         // which direction
-        if( d == "LEFT") snakeX -= box;
-        if( d == "UP") snakeY -= box;
-        if( d == "RIGHT") snakeX += box;
-        if( d == "DOWN") snakeY += box;
+        if( e.direction == "LEFT") snakeX -= box;
+        if( e.direction == "UP") snakeY -= box;
+        if( e.direction == "RIGHT") snakeX += box;
+        if( e.direction == "DOWN") snakeY += box;
 
         // if snake eats the food 
         if(snakeX == food.x && snakeY == food.y) {
             e.score++;
             food = new Food();
         } else {
-            // remove the tail 
-            e.snake.pop();
+            if(snakeX == food2.x && snakeY == food2.y) {
+                e.score++;
+                food2 = new Food();
+            } else {
+                // remove the tail 
+                e.snake.pop();
+            }
         }
+        
+
 
         // add new Head
         let newHead = {
@@ -76,12 +87,10 @@ function draw() {
 
         ctx.fillStyle = "white";
         ctx.font = "45px Changa one";
-        ctx.fillText(e.score, 2*box, 1.6*box);
+
+        ctx.fillText(e.score, (i+1)*2*box, 1.6*box);
 
     });
-    // ctx.fillStyle = "white";
-    // ctx.font = "45px Changa one";
-    // ctx.fillText(e.score, 2*box, 1.6*box);
 }
 
 // call draw function every 100ms

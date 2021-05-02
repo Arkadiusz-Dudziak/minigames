@@ -18,8 +18,22 @@ function collision(head, array) {
     return false;
 }
 
-var s1 = new Snake(9, 10);
-var s2 = new Snake(15,15);
+function snakes_collision(head, array) {
+    //check head collision
+    if(head.x == array[0].x && head.y == array[0].y) {
+        return true;
+    } else {
+        for(let i=0; i<array.length; i++) {
+            if(head.x == array[i].x && head.y == array[i].y) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+var s1 = new Snake(15, 10);
+var s2 = new Snake(15,12);
 
 var snakes = [];
 snakes[0] = s1;
@@ -79,7 +93,8 @@ function draw() {
 
         // game over
         if(snakeX < box || snakeX > 36 * box || snakeY < 3*box 
-            || snakeY > 22*box || collision(newHead, snake)) {
+            || snakeY > 22*box || collision(newHead, e.snake) 
+            || snakes_collision(newHead, snakes[(i+1)%2].snake)) {
             clearInterval(game);
         }
 
@@ -93,5 +108,5 @@ function draw() {
     });
 }
 
-// call draw function every 100ms
+// call draw function every 200ms
 let game = setInterval(draw, 200);
